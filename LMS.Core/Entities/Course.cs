@@ -8,10 +8,10 @@ namespace LMS.Core.Entities
 {
     public class Course
     {
-        private Course()
-        {
-            Title = null!;
-        }
+        //private Course()
+        //{
+        //    Title = null!;
+        //}
 
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;

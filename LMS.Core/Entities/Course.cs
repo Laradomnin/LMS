@@ -19,8 +19,8 @@ namespace LMS.Core.Entities
         public DateTime StartDate { get; set; }
 
         //NP
-        public ICollection<User>? Users { get; set; } = new List<User>();
-        public ICollection<Document>? Documents { get; set; } = new List<Document>();
-        public ICollection<Module>? Modules { get; set; } = new List<Module>();
+        public ICollection<User> Users { get; set; } = new List<User>();
+        public ICollection<Document> Documents { get; set; } = new List<Document>();
+        public ICollection<Module> Modules { get; set; } = new List<Module>();
     }
 }

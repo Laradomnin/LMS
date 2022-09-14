@@ -13,8 +13,8 @@
         public string Title { get; set; } = string.Empty;
 
         //NP
-        public Course Course { get; set; }
-        public ICollection<Activity> Activitys { get; set; }=new List<Activity>();
+        public Course Course { get; set; } = default!;
+        public ICollection<Activity> Activities { get; set; }=new List<Activity>();
         public ICollection<Document> Documents { get; set; }= new List<Document>(); 
 
         

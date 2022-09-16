@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LMS.Core.Entities;
 using LMS.Web.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LMS.Web.Controllers
 {
+   
     public class CoursesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -46,6 +48,7 @@ namespace LMS.Web.Controllers
         }
 
         // GET: Courses/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -68,6 +71,7 @@ namespace LMS.Web.Controllers
         }
 
         // GET: Courses/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Courses == null)
@@ -119,6 +123,7 @@ namespace LMS.Web.Controllers
         }
 
         // GET: Courses/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Courses == null)
@@ -159,5 +164,7 @@ namespace LMS.Web.Controllers
         {
           return (_context.Courses?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+
     }
 }

@@ -16,20 +16,6 @@ namespace LMS.Web.Data
 
 
         
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    //FluentAPI
-        //    base.OnModelCreating(modelBuilder);
-
-        //    modelBuilder.Entity<Course>()
-        //        .HasMany(c => c.Modules);
-        //        //.WithMany(m => m.Activities)
-        //        modelBuilder.Entity<Document>(
-        //            d => d.HasOne(d => d.Course).WithMany(c => c.Modules),
-        //            d => d.HasOne(e => e.User).WithMany(u => u.Documents));
-
-
-
-        //}
+       
     }
 }

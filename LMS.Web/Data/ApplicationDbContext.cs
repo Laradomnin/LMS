@@ -13,6 +13,7 @@ namespace LMS.Web.Data
         public DbSet<Course> Courses { get; set; } = default!;
         public DbSet<Module> Modules => Set<Module>();
         public DbSet<Document> Documents => Set<Document>();
+        public DbSet<User> Users=>Set<User>();
 
 
         

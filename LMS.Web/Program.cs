@@ -15,9 +15,9 @@ builder.Services.AddDefaultIdentity<User>(
 options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
-    //options.Password.RequireNonAlphanumeric = false;
-    //options.Password.RequiredLength = 5;
-    })
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 5;
+})
 
      .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -28,9 +28,11 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    try 
-    { var userManager = services.GetRequiredService<UserManager<User>>();
     var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = services.GetRequiredService<UserManager<User>>();
+    try 
+    { 
+    
     await RoleInit.InitializeAsync(userManager, rolesManager);
     }
     catch (Exception ex)

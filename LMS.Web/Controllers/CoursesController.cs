@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LMS.Core.Entities;
 using LMS.Web.Data;
 using Microsoft.AspNetCore.Authorization;
+using LMS.Web.ViewModels;
 
 namespace LMS.Web.Controllers
 {
@@ -22,15 +23,49 @@ namespace LMS.Web.Controllers
         }
 
         // GET: Courses
+
+        //public async Task<IActionResult> Index()
+        //{
+        //      return _context.Courses != null ? 
+        //                  View(await _context.Courses.ToListAsync()) :
+        //                  Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
+        //}
+
+
         public async Task<IActionResult> Index()
         {
-              return _context.Courses != null ? 
-                          View(await _context.Courses.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
+           
+            List<CoursOverviewViewModel> overviewList = new List<CoursOverviewViewModel>();
+            var courses = _context.Courses.AsNoTracking().Include(m => m.Modules);
+
+            foreach (var course in courses)
+            {
+                var overview = new CoursOverviewViewModel();
+                overview.Title = course.Title;
+                overview.Id = course.Id;
+                overview.Description = course.Description;
+                overview.StartDate = course.StartDate;
+
+
+                foreach (var module in course.Modules)
+                {
+
+
+                    overview.MId = module.Id;
+                    overview.MTitle = module.Title;
+
+
+                    overviewList.Add(overview);
+                }
+            }
+            return View(overviewList);
         }
 
-        // GET: Courses/Details/5
-        public async Task<IActionResult> Details(int? id)
+
+
+
+// GET: Courses/Details/5
+public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Courses == null)
             {

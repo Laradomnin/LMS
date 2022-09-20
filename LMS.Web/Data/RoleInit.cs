@@ -22,11 +22,21 @@ namespace LMS.Web.Data
             }
             if (await userManager.FindByNameAsync(SEmail) == null)
             {
-                User student = new User { Email = SEmail, UserName = SEmail };
+                User student = new User 
+                { 
+                    Email = SEmail, 
+                    UserName = SEmail, 
+                    FirstName="Lara", 
+                    LastName= "Domnina"
+                };
                 IdentityResult result = await userManager.CreateAsync(student, password);
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(student, "student");
+                }
+                else
+                {
+                    Console.WriteLine("test");
                 }
             }
         }

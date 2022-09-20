@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LMS.Core.Entities.Course>
+﻿@model IEnumerable<LMS.Web.ViewModels.CoursOverviewViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -28,19 +28,17 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.MId)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                 <a asp-action="Booking" asp-route-id="@item.Id">Delete</a>
+                 <a asp-action="Documents" asp-route-id="@item.Id">Documents</a>
             </td>
         </tr>
 }

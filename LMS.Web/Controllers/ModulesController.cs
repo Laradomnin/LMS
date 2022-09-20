@@ -22,6 +22,43 @@ namespace LMS.Web.Controllers
             _context = context;
         }
 
+        //public async Task<IActionResult> Index()
+        //{
+
+        //    List<CoursOverviewViewModel> overviewList = new List<CoursOverviewViewModel>();
+        //    var courses = _context.Courses.AsNoTracking().Include(m => m.Modules);
+
+        //    foreach (var course in courses)
+        //    {
+        //        //int usersCount = course.Users.Count;
+
+        //        foreach (var module in course.Modules)
+        //        {
+        //            var overview = new CoursOverviewViewModel();
+        //            overview.Title = course.Title;
+        //            overview.Id = course.Id;
+        //            overview.Description = course.Description;
+        //            //Alla dok. som hör till kursen
+
+        //            overview.Id = module.Id;
+        //            overview.MTitle = module.Title;
+        //            overview.LastName = module.LastName;
+        //            //overview.Role = user.Role;
+        //            overview.Email = module.Email;
+
+        //            //overview.NumberOfStudents = usersCount;
+
+        //            //var parking = _context.Parking.Where(p => p.VehicleId == vehicle.Id).FirstOrDefault();
+        //            //overview.IsParked = parking == null ? "" : "🅿";
+
+        //            overviewList.Add(overview);
+        //        }
+        //    }
+        //    return View(overviewList);
+        //}
+
+
+
         // GET: Modules
         public async Task<IActionResult> Index()
         {
@@ -60,7 +97,7 @@ namespace LMS.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title")] Module module)
+        public async Task<IActionResult> Create(Module module)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +130,7 @@ namespace LMS.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title")] Module module)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,CourseId")] Module module)
         {
             if (id != module.Id)
             {

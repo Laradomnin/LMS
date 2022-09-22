@@ -36,29 +36,20 @@ namespace LMS.Web.Controllers
         {
            
             List<CoursOverviewViewModel> overviewList = new List<CoursOverviewViewModel>();
-            var courses = _context.Courses.AsNoTracking().Include(m => m.Modules);
-
-            foreach (var course in courses)
-            {
-                var overview = new CoursOverviewViewModel();
-                overview.Title = course.Title;
-                overview.Id = course.Id;
-                overview.Description = course.Description;
-                overview.StartDate = course.StartDate;
-
-
-                foreach (var module in course.Modules)
+            var courses = await _context.Courses
+                .AsNoTracking()
+                .Include(m => m.Modules)
+                .Select(c => new CoursOverviewViewModel
                 {
+                    Title = c.Title,
+                    Id = c.Id,
+                    Description = c.Description,
+                    StartDate = c.StartDate,
+                    Modules = c.Modules
+                }).ToListAsync();
 
 
-                    overview.MId = module.Id;
-                    overview.MTitle = module.Title;
-
-
-                    overviewList.Add(overview);
-                }
-            }
-            return View(overviewList);
+            return View(courses);
         }
 
 

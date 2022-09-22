@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using LMS.Core.Entities;
+using System.ComponentModel;
 
 namespace LMS.Web.ViewModels
 {
     public class CoursOverviewViewModel
     {
-        
+
         // course
         [DisplayName("Course Title")]
         public string? Title { get; set; }
@@ -25,13 +26,15 @@ namespace LMS.Web.ViewModels
         //public string IsParked { get; set; }
 
         // module
-        [DisplayName("Module Id")]
-        public int MId { get; set; }
+        //[DisplayName("Module Id")]
+        //public int MId { get; set; }
 
-        [DisplayName("Module Title")]
-        public string MTitle { get; set; }
-        
+        //[DisplayName("Module Title")]
+        //public string MTitle { get; set; }
+
+        public ICollection<Module> Modules { get; set; } = new List<Module>();
     }
+
 
 }
 

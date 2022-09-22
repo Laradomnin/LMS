@@ -1,7 +1,12 @@
 using LMS.Core.Entities;
+using LMS.Core.Repositories;
 using LMS.Web.Data;
+using LMS.Web.Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,13 +20,19 @@ builder.Services.AddDefaultIdentity<User>(
 options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireDigit = false;
     options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 5;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 3;
 })
 
      .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
+
+    builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 
 var app = builder.Build();
 

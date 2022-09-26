@@ -1,0 +1,63 @@
+﻿@model LMS.Core.ViewModels.DocumentIndexViewModel
+
+@{
+    ViewData["Title"] = "Documents";
+}
+
+<h2>Documents</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Course </th>
+            <th>User</th>
+            <th>ModuleId</th>
+            <th>ActivityId</th>
+            <th>TimeStamp</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Documents)
+        {
+            string selectedRow = "";
+            if (item.Id == (int?)ViewData["DocumentsId"])
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModuleId)
+                </td>
+                <td>
+                    @if (item.User != null)
+                    {
+                        @item.User.Email
+                    }
+                </td>
+                <td>
+                    @*@foreach (var user in item.Course)
+                    {
+                        @course.Course.CourseID @course.Course.Title <br />
+                    }*@
+                </td>
+                <td>
+                    <a asp-action="Index" asp-route-id="@item.Id">Select</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+           }
+    </tbody>
+</table>

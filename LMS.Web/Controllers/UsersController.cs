@@ -13,32 +13,40 @@ namespace LMS.Web.Controllers
         {
             db = context;
         }
-        public ActionResult Index(int? id, int? courseID)
+
+        public async Task<IActionResult> Index()
         {
-            var viewModel = new TeacherIndexDataModel();
-            viewModel.Teachers = db.Users   //.Where(u => u.role == "teacher")
-
-                .Include(t => t.Course)
-                .Include(t => t.Documents.Select(m => m.User))
-                .OrderBy(t => t.Email);
-
-
-            if (id != null)
-            {
-                ViewBag.TeacherId = id.Value;
-                viewModel.Documents = viewModel.Teachers
-                    .Where(t => t.Id == id.Value).Single().Documents;
-                   
-            }
-
-            if (courseID != null)
-            {
-                ViewBag.CourseID = courseID.Value;
-                viewModel.Teachers = viewModel.Courses.Where(
-                    c => c.CourseID == courseID).Single().Documents;
-            }
-
-            return View(viewModel);
+            var users = db.Users
+                .Include(c => c.Course)
+                .AsNoTracking();
+            return View(await users.ToListAsync());
         }
+        //public ActionResult Index(int? id, int? courseID)
+        //{
+        //    var viewModel = new TeacherIndexDataModel();
+        //    viewModel.Teachers = db.Users   //.Where(u => u.role == "teacher")
+
+        //        .Include(t => t.Course)
+        //        .Include(t => t.Documents.Select(m => m.User))
+        //        .OrderBy(t => t.Email);
+
+
+        //    if (id != null)
+        //    {
+        //        ViewBag.TeacherId = id.Value;
+        //        viewModel.Documents = viewModel.Teachers
+        //            .Where(t => t.Id == id.Value).Single().Documents;
+
+        //    }
+
+        //    if (courseID != null)
+        //    {
+        //        ViewBag.CourseID = courseID.Value;
+        //        viewModel.Teachers = viewModel.Courses.Where(
+        //            c => c.CourseID == courseID).Single().Documents;
+        //    }
+
+        //    return View(viewModel);
+        //}
     }
 }

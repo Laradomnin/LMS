@@ -1,12 +1,21 @@
 ﻿using LMS.Core.Entities;
 using LMS.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 namespace LMS.Web.Data.Repositories
 {
     public class ModuleRepository : IModuleRepository
     {
         private readonly ApplicationDbContext db = null!;
+        public ModuleRepository(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
 
+        public Task<IEnumerable<Module>> GetWithDocsAsync()
+        {
+            throw new NotImplementedException();
+        }
 
         public void Add(User booking)
         {
@@ -22,9 +31,9 @@ namespace LMS.Web.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Module>> GetAsync()
+        public async Task<IEnumerable<Module>> GetModulesAsync()
         {
-            throw new NotImplementedException();
+            return await db.Modules.ToListAsync();
         }
 
         public Task<Module?> GetAsync(int? id)
@@ -37,9 +46,6 @@ namespace LMS.Web.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Module>> GetWithAttendinAsync()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

@@ -9,8 +9,9 @@ namespace LMS.Core.Repositories
 {
     public interface IModuleRepository
     {
-        Task<IEnumerable<Module>> GetAsync();
-        Task<IEnumerable<Module>> GetWithAttendinAsync();
+
+        Task<IEnumerable<Module>> GetModulesAsync();
+        Task<IEnumerable<Module>> GetWithDocsAsync();
         Task<IEnumerable<Module>> GetHistoryAsync();
         Task<Module?> GetAsync(int? id);
         void Add(Module module);

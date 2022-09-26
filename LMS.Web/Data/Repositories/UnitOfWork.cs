@@ -5,7 +5,7 @@ namespace LMS.Web.Data.Repositories
     public class UnitOfWork:IUnitOfWork
     {
         private readonly ApplicationDbContext db;
-        public ModuleRepository ModuleRepository { get; }
+        public IModuleRepository ModuleRepository { get; }
         public IUserRepository UserRepository { get; }
 
         public UnitOfWork(ApplicationDbContext db)

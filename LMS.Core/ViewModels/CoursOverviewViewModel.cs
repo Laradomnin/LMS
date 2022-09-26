@@ -14,23 +14,11 @@ namespace LMS.Web.ViewModels
         public int Id { get; set; }
 
         [DisplayName("Course description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [DisplayName("Start Date")]
         public DateTime StartDate { get; set; }
 
-        // meta
-        //[DisplayName("")]
-        //public int Number { get; set; }
-        //[DisplayName("")]
-        //public string IsParked { get; set; }
-
-        // module
-        //[DisplayName("Module Id")]
-        //public int MId { get; set; }
-
-        //[DisplayName("Module Title")]
-        //public string MTitle { get; set; }
 
         public ICollection<Module> Modules { get; set; } = new List<Module>();
     }

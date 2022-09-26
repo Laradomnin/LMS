@@ -8,7 +8,7 @@ namespace LMS.Web.ViewModels
         public int CourseId { get; set; }
 
         [DisplayName("Module Title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
         
 
     }
